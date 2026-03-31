@@ -13,7 +13,7 @@ import { Portfolio } from "./components/Portfolio";
 import { Contact } from "./components/Contact";
 import { Hero } from "./components/Hero";
 import { CategoryPage } from "./components/CategoryPage";
-
+import { Footer } from "./components/Footer";
 
 /* 🔥 Scroll to top */
 function ScrollToTop() {
@@ -26,7 +26,7 @@ function ScrollToTop() {
   return null;
 }
 
-/* 🔥 PREMIUM PAGE ANIMATION (SMOOTHER) */
+/* 🔥 PREMIUM PAGE ANIMATION */
 const pageVariants = {
   initial: {
     opacity: 0,
@@ -47,7 +47,7 @@ const pageVariants = {
 
 const pageTransition = {
   duration: 0.7,
-  ease: [0.25, 1, 0.5, 1], // smooth cubic-bezier (premium feel)
+  ease: [0.25, 1, 0.5, 1],
 };
 
 /* 🔥 ROUTES WITH ANIMATION */
@@ -127,7 +127,7 @@ function AnimatedRoutes() {
   );
 }
 
-/* 🔥 PAGE WRAPPER */
+/* 🔥 PAGE WRAPPER (FIXED: removed min-h-screen) */
 function PageWrapper({ children }: any) {
   return (
     <motion.div
@@ -136,36 +136,55 @@ function PageWrapper({ children }: any) {
       animate="animate"
       exit="exit"
       transition={pageTransition}
-      className="min-h-screen relative"
+      className="relative"
     >
       {children}
     </motion.div>
   );
 }
 
-/* 🔥 MAIN APP */
+/* 🔥 MAIN APP (FIXED LAYOUT) */
 export default function App() {
   return (
     <BrowserRouter>
 
       <ScrollToTop />
-      <Header />
 
-      <main className="min-h-screen text-white relative  overflow-x-hidden bg-[radial-gradient(ellipse_at_top,_#0a0a0a,_#000000_60%)]">
+      {/* ✅ MAIN FLEX LAYOUT */}
+      <div className="flex flex-col min-h-screen bg-black text-white overflow-x-hidden">
 
-  {/* 🔥 SOFT TOP GLOW */}
-  <div className="absolute top-[-250px] left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-white/5 blur-[140px] rounded-full pointer-events-none" />
+        {/* HEADER */}
+        <Header />
 
-  {/* 🔥 LEFT LIGHT */}
-  <div className="absolute top-[30%] left-[-200px] w-[500px] h-[500px] bg-purple-500/10 blur-[120px] rounded-full pointer-events-none" />
+        {/* MAIN CONTENT */}
+        <main className="min-h-screen text-white relative overflow-x-hidden 
+bg-black">
 
-  {/* 🔥 RIGHT LIGHT */}
-  <div className="absolute top-[40%] right-[-200px] w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none" />
+  {/* 🔥 SOFT TOP GLOW (REDUCED) */}
+  <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 
+  w-[700px] h-[700px] bg-white/5 blur-[120px] rounded-full pointer-events-none" />
 
-  {/* KEEP YOUR EXISTING CONTENT */}
-  <AnimatedRoutes />
+  {/* 🔥 LEFT LIGHT (LESS INTENSE) */}
+  <div className="absolute top-[30%] left-[-200px] 
+  w-[400px] h-[400px] bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+  {/* 🔥 RIGHT LIGHT (LESS INTENSE) */}
+  <div className="absolute top-[40%] right-[-200px] 
+  w-[400px] h-[400px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+  <div className="relative z-10">
+    <AnimatedRoutes />
+  </div>
 
 </main>
+
+
+        {/* ✅ FOOTER (NOW FIXED POSITION) */}
+        <Footer />
+
+      </div>
+
     </BrowserRouter>
   );
 }
+
