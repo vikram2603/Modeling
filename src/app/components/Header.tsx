@@ -19,11 +19,10 @@ export function Header() {
           {/* LOGO */}
           <NavLink
             to="/"
-            className="text-gray-600 tracking-wider hover:text-black transition"
+            className="text-gray-600 tracking-wider hover:"
           >
             ALEXANDRA
           </NavLink>
-
           {/* DESKTOP NAV */}
           <nav className="hidden md:flex space-x-8">
 
